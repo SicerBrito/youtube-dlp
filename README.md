@@ -17,3 +17,7 @@ Esta fue la forma mas facil en la que yo lo pude descargar y fue con el chocolat
     ```
     choco install yt-dlp
     ```
+    Y podremos descargar los videos desde la terminal con ```yt-dlp url```
+
+### Documentación de comandos
+En esta pagina podemos ver algunos comandos que podremos utilizar para realizar la descarga de los videos
