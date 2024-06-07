@@ -124,21 +124,57 @@ Esta fue la forma más facil y rapida en la que yo lo pude descargar, descargamo
 
   - 5. Como saber utilizar bien el comando ```--list-formats``` a la hora de descargar algo, debemos de tener en cuenta que entre mas grande sea el numero dentro de la columna vamos a identificarlo como la mejor opcion dentro de las disponibles <br/><br/>
 
-    - 5.1 En caso de querer descargar un video dentro de la lista de formatos nos fijaremos en dos columnas ```RESOLUTION``` y ```TBR (Total Bitrate)```, debemos fijarnos tambien de no descargar un archivo muy pesado verificando la columna ```FILESIZE``` si queremos descargar el mejor archivo segun ```Calidad/Peso```, si es asi evita descargar los archivos con este simbolo ```~``` dentro de la columna ```FILESIZE```
+    - 5.1 En caso de querer descargar un video dentro de la lista de formatos nos fijaremos en dos columnas ```RESOLUTION``` y ```TBR (Total Bitrate)```, debemos fijarnos tambien de no descargar un archivo muy pesado verificando la columna ```FILESIZE``` si queremos descargar el mejor archivo segun ```Calidad/Peso```, si es asi evita descargar los archivos con este simbolo ```~``` dentro de la columna ```FILESIZE``` porque son los que mas pesan dentro de las opciones disponibles 
 
       <img src="./img/list-formats-video.PNG">
 
-      En este caso la mejor opción de segun ```Calidad/Peso``` es el ```ID 398```.
+      En este caso la mejor opción segun ```Calidad/Peso``` es el ```ID 398```.
 
-      Este es el comando para descargar el archivo de video seleccionado
+      Este seria el comando para descargar el archivo de ```video``` seleccionado
       ```
       yt-dlp -f "398" URL
       ```
 
-    - 5.2 En caso de querer descargar un audio dentro de la lista de formatos nos fijaremos en dos columnas ```ACODEC``` y ```ABR (Audio Bitrate)```
+    - 5.2 En caso de querer descargar un audio dentro de la lista de formatos nos fijaremos en dos columnas ```ACODEC``` y ```ABR (Audio Bitrate)``` y escogemos el ID del audio que más nos convenga
+
+      <img src="./img/list-formats-audio.PNG">
+
+      En este caso la mejor opción seria el ```ID 251``` debido a la calidad del audio ```128k```.
+
+      Este seria el comando para descargar el archivo de ```audio``` seleccionado
+      ```
+      yt-dlp -f "251" URL
+      ```
+
+    Con estos comandos solo se descargaria cada archivo por separado, y aunque podemos descargarlos al mismo tiempo con este comando ```yt-dlp -f "398+251" URL``` seguirian descargandose por separado asi que la solución a este problema si es que queremos descargando unidos es con este comando
+      ```
+      yt-dlp -f "232+251" --merge-output-format mp4 https://youtu.be/kydvrUuSBPA
+      ```
+
+    Que lo que hace es unir ambos archivos y los convierte en formato ```mp4```
+
+    Esta seria la opción si queremos verificar que es lo que vamos a instalar. Pero si queremos evitar este proceso o acortarlo podemos utilizar los siguientes comandos (Recordar que debemos de tener instalado el paqute ```ffmpeg```)
+
+      ```
+      yt-dlp -f "bestvideo+bestaudio" --merge-output-format mp4 URL
+      ```
+
+      ```
+      yt-dlp -f "bestvideo[height<=720]+bestaudio/best[height<=720]" URL
+      ```
+
+      ```
+      yt-dlp -f "bestvideo[ext=mp4]+bestaudio[ext=m4a]/best" URL
+      ```
+
+      <br/><br/>
+
+      > **DATO A TENER EN CUENTA:** Aunque la mayoría de las veces el no utilizar las comillas para los argumentos de ```-f``` como ```yt-dlp -f "251" URL``` a ```yt-dlp -f 251 URL``` pueden llegar a funcionar a la hora de ejecutarlos en la terminal pero al usar las comillas garantiza que todo el argumento de la opción ```-f``` se interprete correctamente como un único argumento, especialmente en sistemas ```Unix``` como ```Linux``` o ```macOS``` donde es más común que se requieran comillas en tales casos
+
+      <br/>
 
 
-##
+
 
 ### Documentación de comandos disponibles en la web
 En esta pagina podemos ver algunos comandos que podremos utilizar para realizar la descarga de los videos en el caso de ralizar descargas con caracteristicas espesificas además de una documentación bastante completa
