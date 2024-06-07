@@ -5,7 +5,7 @@ Manual de manejo e instalación además de instrucciones y recomendaciones
 ## Instalación
 
 ### Archivo ```.exe```
-Puedes descargar directamente el archivo ejecutable si deseas realizar la instalación desde ```Windows``` y se te resulta más fácil [Descargar archivo .exe](./yt-dlp.exe)
+Puedes descargar directamente el archivo ejecutable si deseas realizar la instalación desde ```Windows``` y se te resulta más fácil <a href="./yt-dlp.exe" download>Descargar archivo .exe</a>
 
 ### Desde ```Chocolatey```
 Esta fue la forma más facil y rapida en la que yo lo pude descargar, descargamos directamente el paquete ```yt-dlp``` utilizando ```chocolatey``` ya que estos paquetes se encuentran disponibles dentro de este gestor de paquetes en linea
