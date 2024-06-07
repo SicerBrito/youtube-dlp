@@ -3,6 +3,8 @@ Manual de manejo e instalación ademas de instrucciones y recomendaciones
 
 ## Instalación
 
+### Archivo .exe
+
 ### Desde Chocolatey
 Esta fue la forma más facil y rapida en la que yo lo pude descargar, descargamos directamente el paquete ```yt-dlp``` utilizando ```chocolatey``` ya que estos paquetes se encuentran disponibles dentro de este gestor de paquetes en linea
   - 1. Instalación de ```chocolatey``` (Recordar que se hace en el Powershell como administrador). Documentación https://chocolatey.org/install  <br/><br/>
@@ -168,6 +170,9 @@ Esta fue la forma más facil y rapida en la que yo lo pude descargar, descargamo
       ```
 
       <br/><br/>
+
+> [!TIP]
+> Optional information to help a user be more successful.
 
       > **DATO A TENER EN CUENTA:** Aunque la mayoría de las veces el no utilizar las comillas para los argumentos de ```-f``` como ```yt-dlp -f "251" URL``` a ```yt-dlp -f 251 URL``` pueden llegar a funcionar a la hora de ejecutarlos en la terminal pero al usar las comillas garantiza que todo el argumento de la opción ```-f``` se interprete correctamente como un único argumento, especialmente en sistemas ```Unix``` como ```Linux``` o ```macOS``` donde es más común que se requieran comillas en tales casos
 
