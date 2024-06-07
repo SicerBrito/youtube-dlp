@@ -1,7 +1,8 @@
 # youtube-dlp
 Manual de manejo e instalación ademas de instrucciones y recomendaciones
 
-## Instalación
+## Instalación[
+![Logo de Wikipedia](https://raw.githubusercontent.com/yt-dlp/yt-dlp/master/.github/banner.svg "Wikipedia logo")
 
 ### Archivo .exe
 
