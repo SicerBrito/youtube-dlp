@@ -1,11 +1,11 @@
 # youtube-dlp Documentación hecha por Sicer Andres Brito Gutierrez 👨‍💻
-Manual de manejo e instalación ademas de instrucciones y recomendaciones
+Manual de manejo e instalación además de instrucciones y recomendaciones
 
 ![Logo de yt-dlp](./img/yt-dlp-tutorial-removebg-preview.png "Logo de yt-dlp")
 ## Instalación
 
 ### Archivo ```.exe```
-Puedes descargar directamente el archivo ejecutable si deseas realizar la instalación desde ```Windows``` y se te resulta mÁs fácil [Descargar archivo .exe](./yt-dlp.exe)
+Puedes descargar directamente el archivo ejecutable si deseas realizar la instalación desde ```Windows``` y se te resulta más fácil [Descargar archivo .exe](./yt-dlp.exe)
 
 ### Desde ```Chocolatey```
 Esta fue la forma más facil y rapida en la que yo lo pude descargar, descargamos directamente el paquete ```yt-dlp``` utilizando ```chocolatey``` ya que estos paquetes se encuentran disponibles dentro de este gestor de paquetes en linea
