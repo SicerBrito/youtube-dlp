@@ -1,12 +1,13 @@
-# youtube-dlp
+# youtube-dlp Documentación hecha por Sicer Andres Brito Gutierrez 👨‍💻
 Manual de manejo e instalación ademas de instrucciones y recomendaciones
 
-## Instalación[
-![Logo de Wikipedia](https://raw.githubusercontent.com/yt-dlp/yt-dlp/master/.github/banner.svg "Wikipedia logo")
+![Logo de yt-dlp](./img/yt-dlp-tutorial-removebg-preview.png "Logo de yt-dlp")
+## Instalación
 
-### Archivo .exe
+### Archivo ```.exe```
+Puedes descargar directamente el archivo ejecutable si deseas realizar la instalación desde ```Windows``` y se te resulta mÁs fácil [Descargar archivo .exe](./yt-dlp.exe)
 
-### Desde Chocolatey
+### Desde ```Chocolatey```
 Esta fue la forma más facil y rapida en la que yo lo pude descargar, descargamos directamente el paquete ```yt-dlp``` utilizando ```chocolatey``` ya que estos paquetes se encuentran disponibles dentro de este gestor de paquetes en linea
   - 1. Instalación de ```chocolatey``` (Recordar que se hace en el Powershell como administrador). Documentación https://chocolatey.org/install  <br/><br/>
   Con PowerShell, debemos asegurarnos de que ```Get-ExecutionPolicy``` no esté restringido. Se sugiere usar ```Bypass``` para omitir la política para instalar cosas o ```AllSigned``` para obtener un poco más de seguridad.<br/><br/>
