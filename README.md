@@ -2,6 +2,7 @@
 Manual de manejo e instalación además de instrucciones y recomendaciones
 
 ![Logo de yt-dlp](./img/yt-dlp-tutorial-removebg-preview.png "Logo de yt-dlp")
+
 ## Instalación
 
 ### Archivo ```.exe```
