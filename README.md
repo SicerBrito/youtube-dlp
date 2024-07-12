@@ -2,9 +2,9 @@
 Manual de manejo e instalación además de instrucciones y recomendaciones
 Este es el comando más útil y que más vamos a utilizar, lo coloco aquí para que no tener que buscarlo entre la documentación completa
 
-      ```
-      yt-dlp -f "bestvideo+bestaudio" --merge-output-format mp4 URL
-      ```
+```
+yt-dlp -f "bestvideo+bestaudio" --merge-output-format mp4 URL
+```
 
 ![Logo de yt-dlp](./img/yt-dlp-tutorial-removebg-preview.png "Logo de yt-dlp")
 
