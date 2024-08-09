@@ -2,9 +2,15 @@
 Manual de manejo e instalación además de instrucciones y recomendaciones
 
 Este es el comando más útil y que más vamos a utilizar, lo coloco aquí para que no tener que buscarlo entre la documentación completa
-
+- Comando para descargar un video junto a su audio con la mejor calidad disponible
 ```
 yt-dlp -f "bestvideo+bestaudio" --merge-output-format mp4 URL
+```
+
+Segundo comando más útil que me ha tocado utilizar varias veces, lo coloco aquí para que no tener que buscarlo entre la documentación completa
+- Comando para descargar solo el audio con la mejor calidad disponible
+```
+yt-dlp -f bestaudio --extract-audio --audio-format mp3 URL
 ```
 
 ![Logo de yt-dlp](./img/yt-dlp-tutorial-removebg-preview.png "Logo de yt-dlp")
