@@ -1,206 +1,213 @@
-# youtube-dlp Documentación hecha por Sicer Andres Brito Gutierrez 👨‍💻
-Manual de manejo e instalación además de instrucciones y recomendaciones
+# youtube-dlp: Guía Completa de Uso e Instalación
 
-Este es el comando más útil y que más vamos a utilizar, lo coloco aquí para que no tener que buscarlo entre la documentación completa
-- Comando para descargar un video junto a su audio con la mejor calidad disponible
+![Logo de yt-dlp](./img/yt-dlp-tutorial-removebg-preview.png "Logo de yt-dlp")
+
+## Introducción
+
+youtube-dlp es una herramienta de línea de comandos potente y versátil para descargar videos de YouTube y otros sitios web de video. Es un fork mejorado del popular youtube-dl, con características adicionales y mejor rendimiento.
+
+Esta guía, creada por Sicer Andres Brito Gutierrez, proporciona instrucciones detalladas sobre la instalación, uso básico y avanzado de youtube-dlp.
+
+## Tabla de Contenidos
+
+1. [Comandos Más Útiles](#comandos-más-útiles)
+2. [Instalación](#instalación)
+3. [Comandos Comunes](#comandos-comunes)
+4. [Uso Avanzado](#uso-avanzado)
+5. [Mejores Prácticas](#mejores-prácticas)
+6. [Solución de Problemas](#solución-de-problemas)
+7. [Recursos Adicionales](#recursos-adicionales)
+
+## Comandos Más Útiles
+
+Estos son los comandos que más utilizarás:
+
+1. Descargar un video con la mejor calidad disponible:
+   ```
+   yt-dlp -f "bestvideo+bestaudio" --merge-output-format mp4 URL
+   ```
+
+2. Descargar solo el audio con la mejor calidad disponible:
+   ```
+   yt-dlp -f bestaudio --extract-audio --audio-format mp3 URL
+   ```
+
+## Instalación
+
+### Windows
+
+#### Opción 1: Archivo `.exe`
+Descarga el archivo ejecutable directamente desde [el repositorio oficial](https://github.com/yt-dlp/yt-dlp/releases).
+
+#### Opción 2: Usando Chocolatey
+
+1. Instala Chocolatey:
+   ```powershell
+   Set-ExecutionPolicy Bypass -Scope Process -Force; [System.Net.ServicePointManager]::SecurityProtocol = [System.Net.ServicePointManager]::SecurityProtocol -bor 3072; iex ((New-Object System.Net.WebClient).DownloadString('https://community.chocolatey.org/install.ps1'))
+   ```
+
+2. Instala youtube-dlp:
+   ```
+   choco install yt-dlp
+   ```
+
+3. Instala ffmpeg (necesario para algunas funciones):
+   ```
+   choco install ffmpeg
+   ```
+
+### Linux y macOS
+
+Usa pip para instalar youtube-dlp:
+
+```
+pip install yt-dlp
+```
+
+## Comandos Comunes
+
+1. Descargar un video:
+   ```
+   yt-dlp URL
+   ```
+
+2. Listar formatos disponibles:
+   ```
+   yt-dlp --list-formats URL
+   ```
+
+3. Seleccionar el mejor video y audio y combinar:
+   ```
+   yt-dlp -f bestvideo+bestaudio --merge-output-format mp4 URL
+   ```
+
+4. Descargar solo el audio:
+   ```
+   yt-dlp -f bestaudio --extract-audio --audio-format mp3 URL
+   ```
+
+5. Especificar el nombre del archivo de salida:
+   ```
+   yt-dlp -o "NOMBRE_DEL_ARCHIVO.%(ext)s" URL
+   ```
+
+6. Descargar una lista de reproducción completa:
+   ```
+   yt-dlp --yes-playlist URL
+   ```
+
+7. Limitar la velocidad de descarga:
+   ```
+   yt-dlp --limit-rate RATE URL
+   ```
+
+8. Descargar subtítulos:
+   ```
+   yt-dlp --write-sub --sub-lang LANG URL
+   ```
+
+9. Incrustar subtítulos:
+   ```
+   yt-dlp --embed-subs URL
+   ```
+
+10. Usar archivo de cookies:
+    ```
+    yt-dlp --cookies COOKIES_FILE URL
+    ```
+
+## Uso Avanzado
+
+### Cómo utilizar el comando `--list-formats`
+
+El comando `--list-formats` muestra todos los formatos disponibles para un video. Aquí te explicamos cómo interpretarlo:
+
+- Para video: Fíjate en las columnas `RESOLUTION` y `TBR (Total Bitrate)`.
+- Para audio: Observa las columnas `ACODEC` y `ABR (Audio Bitrate)`.
+
+Ejemplo de salida del comando `--list-formats`:
+
+![Ejemplo de list-formats](./img/list-formats.PNG)
+
+#### Selección de formatos de video
+
+Al seleccionar un formato de video, presta atención a las columnas `RESOLUTION`, `TBR (Total Bitrate)`, y `FILESIZE`. Evita los archivos con el símbolo `~` en la columna `FILESIZE` si buscas una buena relación calidad/peso.
+
+![Selección de formatos de video](./img/list-formats-video.PNG)
+
+En este ejemplo, el `ID 398` sería una buena opción considerando la calidad y el tamaño del archivo.
+
+Para descargar el video seleccionado:
+```
+yt-dlp -f "398" URL
+```
+
+#### Selección de formatos de audio
+
+Para el audio, enfócate en las columnas `ACODEC` y `ABR (Audio Bitrate)`.
+
+![Selección de formatos de audio](./img/list-formats-audio.PNG)
+
+En este caso, el `ID 251` sería la mejor opción debido a la calidad del audio (128k).
+
+Para descargar el audio seleccionado:
+```
+yt-dlp -f "251" URL
+```
+
+#### Combinando video y audio
+
+Para descargar y combinar los mejores formatos de video y audio:
 ```
 yt-dlp -f "bestvideo+bestaudio" --merge-output-format mp4 URL
 ```
 
-Segundo comando más útil que me ha tocado utilizar varias veces, lo coloco aquí para que no tener que buscarlo entre la documentación completa
-- Comando para descargar solo el audio con la mejor calidad disponible
+O si quieres limitar la resolución:
 ```
-yt-dlp -f bestaudio --extract-audio --audio-format mp3 URL
+yt-dlp -f "bestvideo[height<=720]+bestaudio/best[height<=720]" URL
 ```
 
-![Logo de yt-dlp](./img/yt-dlp-tutorial-removebg-preview.png "Logo de yt-dlp")
+### Descarga de Playlists y Canales
 
-<br/>
+- Descargar una playlist completa:
+  ```
+  yt-dlp -i https://www.youtube.com/playlist?list=PLxxxxxxxxxxxxxxxx
+  ```
 
-## Instalación
+- Descargar los últimos 20 videos de un canal:
+  ```
+  yt-dlp -i --playlist-reverse --playlist-end 20 https://www.youtube.com/channel/UCxxxxxxxxxxxxxxxx
+  ```
 
-### Archivo ```.exe```
-Puedes descargar directamente el archivo ejecutable si deseas realizar la instalación desde `Windows` y se te resulta más fácil [Descargar archivo .exe](./yt-dlp.exe) (Si el archivo no se descarga directamente sino que por el contrario te redirecciona al archivo entonces dirígete al símbolo de descarga en la parte superior derecha que dice ```Download raw file```)
+## Mejores Prácticas
 
-### Desde ```Chocolatey```
-Esta fue la forma más facil y rapida en la que yo lo pude descargar, descargamos directamente el paquete ```yt-dlp``` utilizando ```chocolatey``` ya que estos paquetes se encuentran disponibles dentro de este gestor de paquetes en linea
-  - 1. Instalación de ```chocolatey``` (Recordar que se hace en el Powershell como administrador). Documentación https://chocolatey.org/install  <br/><br/>
-  Con PowerShell, debemos asegurarnos de que ```Get-ExecutionPolicy``` no esté restringido. Se sugiere usar ```Bypass``` para omitir la política para instalar cosas o ```AllSigned``` para obtener un poco más de seguridad.<br/><br/>
-  Ejecutar ```Get-ExecutionPolicy```. Y si regresa Restricted, ejecute ```Set-ExecutionPolicy AllSigned``` o ```Set-ExecutionPolicy Bypass -Scope Process```.<br/><br/>
-  Y ejecute ahora si este comando para realizar la instalación<br/><br/>
-        ```
-        Set-ExecutionPolicy Bypass -Scope Process -Force; [System.Net.ServicePointManager]::SecurityProtocol = [System.Net.ServicePointManager]::SecurityProtocol -bor 3072; iex ((New-Object System.Net.WebClient).DownloadString('https://community.chocolatey.org/install.ps1'))
-        ```
-        
-        Si no se ve ningún error, ¡estara listo para usar ```Chocolatey```! Puedes escribir ```choco``` o ```choco -?``` para verificar la instalacion
-
-  - 2. Instalación del paquete ```youtube-dlp``` <br/><br/>
-       Simplemente ejecutamos desde la terminal el siguiente comando
-    
-          ```
-          choco install yt-dlp
-          ```
-        Si la instalación sale exitosamente ya podremos descargar videos desde la terminal con este comando ```yt-dlp url```, aunque estos videos suelen descargarse con una resolución muy baja y se llegan a ver pixeleados
-
-  - 3. Intalación del paquete ```ffmpeg``` <br/><br/>
-  En este caso vamos a utilizar este paquete para que ```yt-dlp``` pueda combinar el video y el audio a la hora de descargar videos con la mayor calidad de video y de audio, además de que es requerido para poder ejecutar algunos comandos que vamos a ver y utilizar despues <br/><br/>
-        <details>
-        <summary>Descripción de este paquete</summary>
-        <br>
-        Descripción encontrada en la web
-        <br><br>
-        FFmpeg es el marco multimedia líder, capaz de decodificar, codificar, transcodificar, mux, demux, transmitir, filtrar y reproducir prácticamente cualquier cosa que los humanos y las máquinas hayan creado. Admite desde los formatos antiguos más oscuros hasta los más modernos. No importa si fueron diseñados por algún comité de estándares, la comunidad o una corporación. También es altamente portátil: FFmpeg compila, ejecuta y pasa nuestra infraestructura de prueba FATE en Linux, Mac OS X, Microsoft Windows, BSD, Solaris, etc. en una amplia variedad de entornos de compilación, arquitecturas de máquinas y configuraciones.
-        </details>
-
-        ---
-
-  - 4. Comandos más útiles y comunes dentro de ```yt-dlp``` <br/><br/>
-  Si deseas conocer todos los comandos disponibles de ```yt-dlp``` puedes ver la información del paquete dentro de la terminal utilizando el comando ```yt-dlp --help``` o ir a revisar directamente la documentación original https://github.com/yt-dlp/yt-dlp#usage-and-options <br/><br/>
-
-        Los comandos que voy a colocar aqui son los que yo veo mas útiles y que pueden llegar a ser los que más utilizaremos <br/><br/>
-  
-    - 4.1 Comando para descargar un video
-      ```
-      yt-dlp URL
-      ```
-      Este comando descarga el video de la URL proporcionada
-
-      ---
-
-    - 4.2 Comando para listar formatos disponibles
-      ```
-      yt-dlp --list-formats URL
-      ```
-      Este comando muestra los formatos de video y audio disponibles para un video proporcionado de la URL
-
-      <img src="./img/list-formats.PNG">
-
-      En este caso la visualización de los formatos del video sera esta
-
-      ---
-    - 4.3 Comando para seleccionar el mejor video y audio y combinar
-      ```
-      yt-dlp -f bestvideo+bestaudio --merge-output-format mp4 URL
-      ```
-      Descarga y combina el mejor video y audio en un archivo MP4
-
-      ---
-    - 4.4 Comando para descargar solo el audio
-      ```
-      yt-dlp -f bestaudio --extract-audio --audio-format mp3 URL
-      ```
-      Descarga solo el audio y lo convierte a formato MP3
-
-      ---
-    - 4.5 Comando para especificar el nombre del archivo de salida
-      ```
-      yt-dlp -o "NOMBRE_DEL_ARCHIVO.%(ext)s" URL
-      ```
-      Permite personalizar el nombre del archivo de salida
-      ```
-      yt-dlp -o "NOMBRE_DEL_ARCHIVO.mp3" URL
-      ```
-      Además si queremos podemos modificar la extension de este archivo de esta formato de esta manera
-
-      ---
-    - 4.6 Comando para descargar una lista de reproducción completa
-      ```
-      yt-dlp --yes-playlist URL
-      ```
-      Descarga todos los videos de una lista de reproducción
-
-      ---
-    - 4.7 Comando para limitar la velocidad de descarga
-      ```
-      yt-dlp --limit-rate RATE URL
-      ```
-      Limita la velocidad de descarga para no saturar la conexión
-
-      ---
-    - 4.8 Comando para descargar subtítulos
-      ```
-      yt-dlp --write-sub --sub-lang LANG URL
-      ```
-      Descarga los subtítulos en el idioma especificado
-
-      ---
-    - 4.9 Comando para incrustar subtítulos
-      ```
-      yt-dlp --embed-subs URL
-      ```
-      Incrusta los subtítulos en el video
-
-      ---
-    - 4.10 Comando para usar archivo de cookies
-      ```
-      yt-dlp --cookies COOKIES_FILE URL
-      ```
-      Permite usar cookies para descargas que requieren autenticación
-
-      ---
-
-<br/>
-
-  - 5. Como saber utilizar bien el comando ```--list-formats``` a la hora de descargar algo, debemos de tener en cuenta que entre mas grande sea el numero dentro de la columna vamos a identificarlo como la mejor opcion dentro de las disponibles <br/><br/>
-
-    - 5.1 En caso de querer descargar un video dentro de la lista de formatos nos fijaremos en dos columnas ```RESOLUTION``` y ```TBR (Total Bitrate)```, debemos fijarnos tambien de no descargar un archivo muy pesado verificando la columna ```FILESIZE``` si queremos descargar el mejor archivo segun ```Calidad/Peso```, si es asi evita descargar los archivos con este simbolo ```~``` dentro de la columna ```FILESIZE``` porque son los que mas pesan dentro de las opciones disponibles 
-
-      <img src="./img/list-formats-video.PNG">
-
-      En este caso la mejor opción segun ```Calidad/Peso``` es el ```ID 398```.
-
-      Este seria el comando para descargar el archivo de ```video``` seleccionado
-      ```
-      yt-dlp -f "398" URL
-      ```
-
-    - 5.2 En caso de querer descargar un audio dentro de la lista de formatos nos fijaremos en dos columnas ```ACODEC``` y ```ABR (Audio Bitrate)``` y escogemos el ID del audio que más nos convenga
-
-      <img src="./img/list-formats-audio.PNG">
-
-      En este caso la mejor opción seria el ```ID 251``` debido a la calidad del audio ```128k```.
-
-      Este seria el comando para descargar el archivo de ```audio``` seleccionado
-      ```
-      yt-dlp -f "251" URL
-      ```
-
-    Con estos comandos solo se descargaria cada archivo por separado, y aunque podemos descargarlos al mismo tiempo con este comando ```yt-dlp -f "398+251" URL``` seguirian descargandose por separado asi que la solución a este problema si es que queremos descargando unidos es con este comando
-      ```
-      yt-dlp -f "232+251" --merge-output-format mp4 https://youtu.be/kydvrUuSBPA
-      ```
-
-    Que lo que hace es unir ambos archivos y los convierte en formato ```mp4```
-
-    Esta seria la opción si queremos verificar que es lo que vamos a instalar. Pero si queremos evitar este proceso o acortarlo podemos utilizar los siguientes comandos (Recordar que debemos de tener instalado el paqute ```ffmpeg```)
-
-      ```
-      yt-dlp -f "bestvideo+bestaudio" --merge-output-format mp4 URL
-      ```
-
-      ```
-      yt-dlp -f "bestvideo[height<=720]+bestaudio/best[height<=720]" URL
-      ```
-
-      ```
-      yt-dlp -f "bestvideo[ext=mp4]+bestaudio[ext=m4a]/best" URL
-      ```
-
-      <br/><br/>
+1. Usa siempre comillas para los argumentos de `-f` para evitar problemas de interpretación.
+2. Actualiza youtube-dlp regularmente para obtener las últimas características y correcciones.
+3. Utiliza `--restrict-filenames` si estás trabajando en diferentes sistemas operativos para evitar problemas con caracteres especiales.
+4. Considera usar `--download-archive FILE` para evitar descargar videos duplicados en múltiples sesiones.
 
 > [!TIP]
-> **DATO A TENER EN CUENTA:** Aunque la mayoría de las veces el no utilizar las comillas para los argumentos de ```-f``` como ```yt-dlp -f "251" URL``` a ```yt-dlp -f 251 URL``` pueden llegar a funcionar a la hora de ejecutarlos en la terminal se recomienda usar las comillas ya que garantiza que todo el argumento de la opción ```-f``` se interprete correctamente como un único argumento, especialmente en sistemas ```Unix``` como ```Linux``` o ```macOS``` donde es más común que se requieran comillas en tales casos
+> **DATO A TENER EN CUENTA:** Aunque la mayoría de las veces el no utilizar las comillas para los argumentos de `-f` como `yt-dlp -f "251" URL` a `yt-dlp -f 251 URL` pueden llegar a funcionar a la hora de ejecutarlos en la terminal se recomienda usar las comillas ya que garantiza que todo el argumento de la opción `-f` se interprete correctamente como un único argumento, especialmente en sistemas `Unix` como `Linux` o `macOS` donde es más común que se requieran comillas en tales casos.
 
-<br/>
+## Solución de Problemas
 
+1. **Error: "Unable to extract video data"**
+   - Asegúrate de tener la última versión de youtube-dlp.
+   - Intenta usar el flag `--no-check-certificate`.
 
+2. **Descarga lenta**
+   - Prueba con diferentes servidores usando `--force-ipv4` o `--force-ipv6`.
+   - Usa `--limit-rate` para evitar throttling.
 
+3. **Problemas con la fusión de audio y video**
+   - Asegúrate de tener ffmpeg instalado y actualizado.
+   - Usa `--verbose` para obtener más información sobre el error.
 
-### Documentación de comandos disponibles en la web
-En esta pagina podemos ver algunos comandos que podremos utilizar para realizar la descarga de los videos en el caso de ralizar descargas con caracteristicas espesificas además de una documentación bastante completa
- - https://www.rapidseedbox.com/es/blog/yt-dlp-complete-guide#04
+## Recursos Adicionales
 
-O leer la documentación oficial dejarnos de pendejadas 🤣🤣🤣
-  - https://github.com/yt-dlp/yt-dlp#usage-and-options
+- [Documentación oficial de youtube-dlp](https://github.com/yt-dlp/yt-dlp#usage-and-options)
+- [Guía completa en RapidSeedbox](https://www.rapidseedbox.com/es/blog/yt-dlp-complete-guide#04)
 
+---
 
+Esta documentación fue creada por Sicer Andres Brito Gutierrez. Si encuentras errores o tienes sugerencias, por favor crea un issue en el repositorio correspondiente.
